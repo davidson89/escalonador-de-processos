@@ -22,7 +22,7 @@ public class ToolsUtils {
 				int hrCriacao = Integer.parseInt(values[1]);
 				int duracao = Integer.parseInt(values[2]);
 				int prioridade = Integer.parseInt(values[3]);
-				processos.add(new Processo(id, hrCriacao, duracao, prioridade));
+				processos.add(new Processo(id, hrCriacao, duracao, prioridade, false));
 			}
 			scanner.close();
 			return processos;
