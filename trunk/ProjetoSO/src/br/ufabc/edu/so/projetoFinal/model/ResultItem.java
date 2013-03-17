@@ -26,6 +26,12 @@ public class ResultItem {
 		this.numeroTrocas = numeroTrocas;
 		this.diagramaTempExex = diagramaTempExex;
 	}
+  // so para teste, mas tb serve para caso o arquivo venha vazio
+    public ResultItem() {
+      		this.tempoMedioEspera = 0;
+		this.tempoMedioRetorno = 0;
+		this.numeroTrocas = 0;  
+    }
 
 	/**
 	 * 
