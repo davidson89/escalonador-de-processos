@@ -30,8 +30,6 @@ public class EscalonadorRRSemPrioridade implements Escalonador {
         Map<Processo, Integer> procTmpEspMap = new HashMap<Processo, Integer>();
         Map<Processo, Integer> procTmpRetMap = new HashMap<Processo, Integer>();
         
-        
-        
         int count = processos.size();
         // quantos processos terminaram 
         int prontos = 0;
@@ -93,12 +91,16 @@ public class EscalonadorRRSemPrioridade implements Escalonador {
             }
         }
         
-        
-        
+
         float tmpMedioEsp = ToolsUtils.getTempoMedio(new ArrayList(procTmpEspMap.values()));
 	float tmpMediRetorno = ToolsUtils.getTempoMedio(new ArrayList(procTmpRetMap.values()));
         
+        ri.setDiagramaTempExex(diagramaTempExex);
+        ri.setNumeroTrocas(NumeroTrocas);
+        ri.setTempoMedioEspera((int)tmpMedioEsp);
+        ri.setTempoMedioRetorno((int)tmpMediRetorno);
         
+ 
         return ri;
     }
     
