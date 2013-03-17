@@ -10,9 +10,9 @@ import java.util.Map;
  */
 public class ResultItem {
 
-	private int tempoMedioEspera;
+	private float tempoMedioEspera;
 
-	private int tempoMedioRetorno;
+	private float tempoMedioRetorno;
 
 	private int numeroTrocas;
 
@@ -20,7 +20,7 @@ public class ResultItem {
 	//Exemplo: instante 0 - Processo 1 | instante 3 - Processo 2 | instante 5 - Processo 1
 	private Map<Integer, Processo> diagramaTempExex;
 
-	public ResultItem(int tempoMedioEspera, int tempoMedioRetorno, int numeroTrocas, Map<Integer, Processo> diagramaTempExex) {
+	public ResultItem(float tempoMedioEspera, float tempoMedioRetorno, int numeroTrocas, Map<Integer, Processo> diagramaTempExex) {
 		this.tempoMedioEspera = tempoMedioEspera;
 		this.tempoMedioRetorno = tempoMedioRetorno;
 		this.numeroTrocas = numeroTrocas;
@@ -31,7 +31,7 @@ public class ResultItem {
 	 * 
 	 * @return tempo medio de espera do escalonamento
 	 */
-	public int getTempoMedioEspera() {
+	public float getTempoMedioEspera() {
 		return tempoMedioEspera;
 	}
 
@@ -43,7 +43,7 @@ public class ResultItem {
 	 * 
 	 * @return tempo medio de retorno do escalonamento
 	 */
-	public int getTempoMedioRetorno() {
+	public float getTempoMedioRetorno() {
 		return tempoMedioRetorno;
 	}
 
