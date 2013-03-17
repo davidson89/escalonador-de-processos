@@ -32,5 +32,13 @@ public class ToolsUtils {
 			throw new RuntimeException("Arquivo com formato incompativel para o mapeamento dos processos!");
 		}
 	}
+	
+	public static float getTempoMedio(List<Integer> valores) {
+		int valorMedio = 0;
+		for (Integer valor : valores) {
+			valorMedio+=valor;
+		}
+		return ((float)valorMedio/(float)valores.size());
+	}
 
 }
