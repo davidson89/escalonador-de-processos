@@ -10,12 +10,14 @@ public class Processo {
 	
 	private int prioridade;
 	
+	private boolean finished;
 
-	public Processo(int id, int hrCriacao, int duracao, int prioridade) {
+	public Processo(int id, int hrCriacao, int duracao, int prioridade, boolean finished) {
 		this.id = id;
 		this.hrCriacao = hrCriacao;
 		this.duracao = duracao;
 		this.prioridade = prioridade;
+		this.finished = finished;
 	}
 
 	public int getId() {
@@ -50,4 +52,11 @@ public class Processo {
 		this.prioridade = prioridade;
 	}
 	
+	public boolean isFinished() {
+		return finished;
+	}
+	
+	public void setFinished(boolean finished) {
+		this.finished = finished;
+	}
 }
