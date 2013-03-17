@@ -1,6 +1,5 @@
 package br.ufabc.edu.so.projetoFinal.Runner;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.List;
 import java.util.Map.Entry;
@@ -11,8 +10,6 @@ import br.ufabc.edu.so.projetoFinal.model.ResultItem;
 import br.ufabc.edu.so.projetoFinal.util.ToolsUtils;
 
 public class Runner {
-	
-	
 
 	public Runner() {
 		try {
