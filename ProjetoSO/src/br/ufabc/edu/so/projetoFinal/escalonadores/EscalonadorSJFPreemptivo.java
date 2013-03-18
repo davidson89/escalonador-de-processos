@@ -9,7 +9,12 @@ public class EscalonadorSJFPreemptivo implements Escalonador {
 
 	@Override
 	public ResultItem execute(List<Processo> processos) {
-		return null;
+		return new ResultItem();
+	}
+
+	@Override
+	public String getName() {
+		return "SJF Preemptivo";
 	}
 
 }

@@ -9,6 +9,12 @@ public interface Escalonador {
 	
 	/**
 	 * 
+	 * @return Retorna o nome do algoritimo.
+	 */
+	public String getName();
+	
+	/**
+	 * 
 	 * @param processos lista com os processos a serem escalonados
 	 * @return ResultItem (estrutura que armazena o resultado do escalonamento)
 	 */

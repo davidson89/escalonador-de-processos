@@ -146,4 +146,9 @@ public class EscalonadorRRComPrioridade implements Escalonador {
         return pro;
 
     }
+
+	@Override
+	public String getName() {
+		return "RR com Prioridade";
+	}
 }

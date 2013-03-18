@@ -16,8 +16,10 @@ public class ResultItem {
 
 	private int numeroTrocas;
 
-	//Este mapa é para guardar a informação de qual processo esta sendo executado a cada instante
-	//Exemplo: instante 0 - Processo 1 | instante 3 - Processo 2 | instante 5 - Processo 1
+	// Este mapa é para guardar a informação de qual processo esta sendo
+	// executado a cada instante
+	// Exemplo: instante 0 - Processo 1 | instante 3 - Processo 2 | instante 5 -
+	// Processo 1
 	private Map<Integer, Processo> diagramaTempExex;
 
 	public ResultItem(float tempoMedioEspera, float tempoMedioRetorno, int numeroTrocas, Map<Integer, Processo> diagramaTempExex) {
@@ -26,12 +28,13 @@ public class ResultItem {
 		this.numeroTrocas = numeroTrocas;
 		this.diagramaTempExex = diagramaTempExex;
 	}
-  // so para teste, mas tb serve para caso o arquivo venha vazio
-    public ResultItem() {
-      		this.tempoMedioEspera = 0;
+
+	// so para teste, mas tb serve para caso o arquivo venha vazio
+	public ResultItem() {
+		this.tempoMedioEspera = 0;
 		this.tempoMedioRetorno = 0;
-		this.numeroTrocas = 0;  
-    }
+		this.numeroTrocas = 0;
+	}
 
 	/**
 	 * 
@@ -79,7 +82,8 @@ public class ResultItem {
 
 	/**
 	 * 
-	 * @param diagramaTempExex recebe um mapa com a estrutura instante-processo.
+	 * @param diagramaTempExex
+	 *            recebe um mapa com a estrutura instante-processo.
 	 */
 	public void setDiagramaTempExex(Map<Integer, Processo> diagramaTempExex) {
 		this.diagramaTempExex = diagramaTempExex;

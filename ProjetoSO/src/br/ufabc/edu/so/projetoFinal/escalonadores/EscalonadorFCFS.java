@@ -30,6 +30,11 @@ public class EscalonadorFCFS implements Escalonador {
 		float tmpMediRetorno = ToolsUtils.getTempoMedio(new ArrayList(procTmpRetMap.values()));
 		return new ResultItem(tmpMedioEsp, tmpMediRetorno, numeroTrocas, diagrama);
 	}
+
+	@Override
+	public String getName() {
+		return "FCFS";
+	}
 	
 
 	
