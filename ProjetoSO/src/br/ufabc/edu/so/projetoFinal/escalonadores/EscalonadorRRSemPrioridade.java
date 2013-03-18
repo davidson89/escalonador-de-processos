@@ -53,8 +53,7 @@ public class EscalonadorRRSemPrioridade implements Escalonador {
 			System.out.println(atual.getProcessado() - 1 + " " + tempoQuantum + " " + tempo);
 
 			diagramaTempExex.put(tempo, atual);
-			procTmpEspMap.put(atual, tempo);
-			procTmpRetMap.put(atual, tempo);
+			
 
 			// processa o processo atual e diminui em 1 o seu processado
 			atual.setProcessado(atual.getProcessado() - 1);
@@ -74,6 +73,11 @@ public class EscalonadorRRSemPrioridade implements Escalonador {
 				// pronto
 				else {
 					atual.setFinished(true);
+                                        int espera = tempo - atual.getDuracao() - atual.getHrCriacao(); 
+                                        int retorno = atual.getDuracao() + espera;
+                                        procTmpEspMap.put(atual, espera);
+                                        procTmpRetMap.put(atual, retorno);
+
 					prontos++;
 				}
 
