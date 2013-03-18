@@ -23,7 +23,7 @@ public class EscalonadorRRComPrioridade implements Escalonador {
             return new ResultItem();
         }
 
-        diagramaTempExex = new HashMap<>();
+        diagramaTempExex = new HashMap<Integer, Processo>();
 
 
         //
@@ -102,6 +102,8 @@ public class EscalonadorRRComPrioridade implements Escalonador {
         ri.setTempoMedioRetorno((int) tmpMediRetorno);
 
 
+        
+        
         return ri;
 
 
@@ -112,19 +114,20 @@ public class EscalonadorRRComPrioridade implements Escalonador {
         Processo processoEscolhido = null;
         boolean encontrouMenorIgual = false;
         int anterior = 0;
+        int escolhido = 0;
         int atual = 0;        
             
         anterior = llp.get(0).getPrioridade();
             
         // procura por algum processo de prioridade igual ou menor
-        for (int i = 0; i < llp.size(); i++) {
+        for (int i = 0; i < llp.size() -1; i++) {
             
             atual = llp.get(i).getPrioridade();
-            if(atual<=anterior) processoEscolhido = llp.get(i);
+            if(atual<=anterior) escolhido = i;
             anterior  = llp.get(i).getPrioridade();
         }
         
-                
+        processoEscolhido = llp.remove(escolhido);        
         return processoEscolhido;
         
     }

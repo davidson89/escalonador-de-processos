@@ -22,7 +22,7 @@ public class EscalonadorRRSemPrioridade implements Escalonador {
 		if (processos.isEmpty())
 			return new ResultItem();
 
-		diagramaTempExex = new HashMap<>();
+		diagramaTempExex = new HashMap<Integer, Processo>();
 
 		//
 		int NumeroTrocas = 0;
