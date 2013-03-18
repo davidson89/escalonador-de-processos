@@ -38,6 +38,9 @@ public class ToolsUtils {
 		for (Integer valor : valores) {
 			valorMedio+=valor;
 		}
+		if(valores.size() == 0) {
+			return 0;
+		}
 		return ((float)valorMedio/(float)valores.size());
 	}
 
