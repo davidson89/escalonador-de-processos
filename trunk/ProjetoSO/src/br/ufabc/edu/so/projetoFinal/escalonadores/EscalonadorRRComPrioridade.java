@@ -56,8 +56,6 @@ public class EscalonadorRRComPrioridade implements Escalonador {
 
 
             diagramaTempExex.put(tempo, atual);
-            procTmpEspMap.put(atual, tempo);
-            procTmpRetMap.put(atual, tempo);
 
             //processa o processo atual e diminui em 1 o seu processado
             atual.setProcessado(atual.getProcessado() - 1);
@@ -75,6 +73,12 @@ public class EscalonadorRRComPrioridade implements Escalonador {
                 else {
                     atual.setFinished(true);
                     prontos++;
+                        int espera = tempo - atual.getDuracao() - atual.getHrCriacao(); 
+                        int retorno = atual.getDuracao() + espera;
+                        procTmpEspMap.put(atual, espera);
+                        procTmpRetMap.put(atual, retorno);
+                    
+                    
                 }
 
                 NumeroTrocas++;
