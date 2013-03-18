@@ -20,9 +20,9 @@ public class EscalonadorFCFS implements Escalonador {
 		Map<Processo, Integer> procTmpRetMap = new HashMap<Processo, Integer>();
 		for (Processo processo : processos) {
 			diagrama.put(instante, processo);
-			procTmpEspMap.put(processo, instante);
+			procTmpEspMap.put(processo, instante - processo.getHrCriacao());
 			instante += processo.getDuracao();
-			procTmpRetMap.put(processo, instante);
+			procTmpRetMap.put(processo, processo.getDuracao() + procTmpEspMap.get(processo));
 			numeroTrocas++;
 			processo.setFinished(true);
 		}
