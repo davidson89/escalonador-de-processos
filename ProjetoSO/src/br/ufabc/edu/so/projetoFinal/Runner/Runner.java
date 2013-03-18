@@ -13,8 +13,10 @@ public class Runner {
 
 	public Runner() {
 		try {
-			List<Processo> processos = ToolsUtils.getListaProcessos(System.getProperty("user.dir")+ "/src/br/ufabc/edu/so/projetoFinal/Runner/processos.txt");
-			ResultBuilder resultBuilder = new ResultBuilder();
+			List<Processo> processos = ToolsUtils.getListaProcessos("/home/ufabc/Documentos/so/escalonador-de-processos/ProjetoSO/src/br/ufabc/edu/so/projetoFinal/Runner/processos.txt");
+			
+                        
+                        ResultBuilder resultBuilder = new ResultBuilder();
 			resultBuilder.print(processos);
 		} catch (FileNotFoundException e) {
 			System.out.println(e.getMessage());
