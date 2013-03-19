@@ -11,6 +11,9 @@ import br.ufabc.edu.so.projetoFinal.util.ToolsUtils;
 
 public class EscalonadorFCFS implements Escalonador {
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public ResultItem execute(List<Processo> processos) {
 		int instante = 0;
@@ -31,6 +34,9 @@ public class EscalonadorFCFS implements Escalonador {
 		return new ResultItem(tmpMedioEsp, tmpMediRetorno, numeroTrocas, diagrama);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public String getName() {
 		return "FCFS";

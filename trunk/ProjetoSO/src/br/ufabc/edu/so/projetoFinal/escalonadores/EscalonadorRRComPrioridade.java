@@ -15,6 +15,9 @@ public class EscalonadorRRComPrioridade implements Escalonador {
     ArrayList<Processo> listaProcesso;
     Map<Integer, Processo> diagramaTempExex;
 
+	/**
+	 * {@inheritDoc}
+	 */
     @Override
     public ResultItem execute(List<Processo> processos) {
 
