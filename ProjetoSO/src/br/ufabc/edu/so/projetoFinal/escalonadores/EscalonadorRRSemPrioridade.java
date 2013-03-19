@@ -16,6 +16,9 @@ public class EscalonadorRRSemPrioridade implements Escalonador {
 	LinkedList<Processo> listaProcesso;
 	Map<Integer, Processo> diagramaTempExex;
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public ResultItem execute(List<Processo> processos) {
 
