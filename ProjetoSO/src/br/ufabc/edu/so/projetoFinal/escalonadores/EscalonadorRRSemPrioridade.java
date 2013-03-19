@@ -25,7 +25,7 @@ public class EscalonadorRRSemPrioridade implements Escalonador {
 		diagramaTempExex = new HashMap<Integer, Processo>();
 
 		//
-		int NumeroTrocas = 0;
+		int numeroTrocas = 0;
 
 		//
 		Map<Processo, Integer> procTmpEspMap = new HashMap<Processo, Integer>();
@@ -43,9 +43,6 @@ public class EscalonadorRRSemPrioridade implements Escalonador {
 		// pega o primeiro processo
 		Processo atual = listaProcesso.pop();
 
-		// resultado
-		ResultItem ri = new ResultItem();
-
 		while (count != prontos) {
 
 			// testes
@@ -53,7 +50,6 @@ public class EscalonadorRRSemPrioridade implements Escalonador {
 			System.out.println(atual.getProcessado() - 1 + " " + tempoQuantum + " " + tempo);
 
 			diagramaTempExex.put(tempo, atual);
-			
 
 			// processa o processo atual e diminui em 1 o seu processado
 			atual.setProcessado(atual.getProcessado() - 1);
@@ -73,15 +69,15 @@ public class EscalonadorRRSemPrioridade implements Escalonador {
 				// pronto
 				else {
 					atual.setFinished(true);
-                                        int espera = tempo - atual.getDuracao() - atual.getHrCriacao(); 
-                                        int retorno = atual.getDuracao() + espera;
-                                        procTmpEspMap.put(atual, espera);
-                                        procTmpRetMap.put(atual, retorno);
+					int espera = tempo - atual.getDuracao() - atual.getHrCriacao();
+					int retorno = atual.getDuracao() + espera;
+					procTmpEspMap.put(atual, espera);
+					procTmpRetMap.put(atual, retorno);
 
 					prontos++;
 				}
 
-				NumeroTrocas++;
+				numeroTrocas++;
 
 				// zera quantum para o proximo processo
 				tempoQuantum = 0;
@@ -98,12 +94,7 @@ public class EscalonadorRRSemPrioridade implements Escalonador {
 		float tmpMedioEsp = ToolsUtils.getTempoMedio(new ArrayList(procTmpEspMap.values()));
 		float tmpMediRetorno = ToolsUtils.getTempoMedio(new ArrayList(procTmpRetMap.values()));
 
-		ri.setDiagramaTempExex(diagramaTempExex);
-		ri.setNumeroTrocas(NumeroTrocas);
-		ri.setTempoMedioEspera((int) tmpMedioEsp);
-		ri.setTempoMedioRetorno((int) tmpMediRetorno);
-
-		return ri;
+		return new ResultItem(tmpMedioEsp, tmpMediRetorno, numeroTrocas, diagramaTempExex);
 	}
 
 	// pega a lista de processos e faz um copia da mesma em linked list
