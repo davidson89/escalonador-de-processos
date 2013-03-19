@@ -91,8 +91,8 @@ public class EscalonadorRRSemPrioridade implements Escalonador {
 			}
 		}
 
-		float tmpMedioEsp = ToolsUtils.getTempoMedio(new ArrayList(procTmpEspMap.values()));
-		float tmpMediRetorno = ToolsUtils.getTempoMedio(new ArrayList(procTmpRetMap.values()));
+		float tmpMedioEsp = ToolsUtils.getTempoMedio(new ArrayList<Integer>(procTmpEspMap.values()));
+		float tmpMediRetorno = ToolsUtils.getTempoMedio(new ArrayList<Integer>(procTmpRetMap.values()));
 
 		return new ResultItem(tmpMedioEsp, tmpMediRetorno, numeroTrocas, diagramaTempExex);
 	}
