@@ -22,8 +22,8 @@ public class ResultBuilder {
 		escalonadores.add(new EscalonadorFCFS());
 		escalonadores.add(new EscalonadorRRComPrioridade());
 		escalonadores.add(new EscalonadorRRSemPrioridade());
-		//escalonadores.add(new EscalonadorSJFNaoPreemptivo());
-		//escalonadores.add(new EscalonadorSJFPreemptivo());
+		escalonadores.add(new EscalonadorSJFNaoPreemptivo());
+		escalonadores.add(new EscalonadorSJFPreemptivo());
 	}
 	
 	public void print(List<Processo> processos) {

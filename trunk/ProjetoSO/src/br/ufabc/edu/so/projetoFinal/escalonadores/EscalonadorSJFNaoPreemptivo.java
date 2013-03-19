@@ -50,10 +50,10 @@ public class EscalonadorSJFNaoPreemptivo implements Escalonador {
 			}
 
 			diagrama.put(instante, processos.get(idProc));
-			procTmpEspMap.put(processos.get(idProc), instante);
+			procTmpEspMap.put(processos.get(idProc), instante - processos.get(idProc).getDuracao());
 			// Aumenta o instante para o tempo de execução do processo
 			instante += processos.get(idProc).getDuracao();
-			procTmpRetMap.put(processos.get(idProc), instante);
+			procTmpRetMap.put(processos.get(idProc), procTmpEspMap.get(processos.get(idProc)) + processos.get(idProc).getDuracao());
 			numTrocas++;
 			processos.get(idProc).setFinished(true);
 			processos.remove(idProc);
