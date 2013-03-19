@@ -44,6 +44,10 @@ public class ResultItem {
 		return tempoMedioEspera;
 	}
 
+	/**
+	 * 
+	 * @param tempoMedioEspera o tempo medio de espera do algoritimo
+	 */
 	public void setTempoMedioEspera(int tempoMedioEspera) {
 		this.tempoMedioEspera = tempoMedioEspera;
 	}
@@ -56,6 +60,10 @@ public class ResultItem {
 		return tempoMedioRetorno;
 	}
 
+	/**
+	 * 
+	 * @param tempoMedioRetorno o tempo medio de retorno do processo
+	 */
 	public void setTempoMedioRetorno(int tempoMedioRetorno) {
 		this.tempoMedioRetorno = tempoMedioRetorno;
 	}
@@ -68,6 +76,10 @@ public class ResultItem {
 		return numeroTrocas;
 	}
 
+	/**
+	 * 
+	 * @param numeroTrocas o numero de trocas de contexto
+	 */
 	public void setNumeroTrocas(int numeroTrocas) {
 		this.numeroTrocas = numeroTrocas;
 	}
