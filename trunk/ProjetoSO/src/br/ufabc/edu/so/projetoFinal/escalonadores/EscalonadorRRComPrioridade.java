@@ -1,14 +1,13 @@
 package br.ufabc.edu.so.projetoFinal.escalonadores;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import br.ufabc.edu.so.projetoFinal.model.Processo;
 import br.ufabc.edu.so.projetoFinal.model.ResultItem;
 import br.ufabc.edu.so.projetoFinal.util.ToolsUtils;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.Map;
 
 public class EscalonadorRRComPrioridade implements Escalonador {
 
@@ -27,7 +26,7 @@ public class EscalonadorRRComPrioridade implements Escalonador {
 
 
         //
-        int NumeroTrocas = 0;
+        int numeroTrocas = 0;
 
         //
         Map<Processo, Integer> procTmpEspMap = new HashMap<Processo, Integer>();
@@ -44,9 +43,6 @@ public class EscalonadorRRComPrioridade implements Escalonador {
         listaProcesso = listaProcesso(processos);
         // pega o primeiro processo
         Processo atual = getProximoProcessoComPrioridade(listaProcesso);
-
-        //resultado 
-        ResultItem ri = new ResultItem();
 
         while (count != prontos) {
 
@@ -81,7 +77,7 @@ public class EscalonadorRRComPrioridade implements Escalonador {
                     
                 }
 
-                NumeroTrocas++;
+                numeroTrocas++;
 
                 // zera quantum para o proximo processo
                 tempoQuantum = 0;
@@ -97,18 +93,10 @@ public class EscalonadorRRComPrioridade implements Escalonador {
         }
 
 
-        float tmpMedioEsp = ToolsUtils.getTempoMedio(new ArrayList(procTmpEspMap.values()));
-        float tmpMediRetorno = ToolsUtils.getTempoMedio(new ArrayList(procTmpRetMap.values()));
+        float tmpMedioEsp = ToolsUtils.getTempoMedio(new ArrayList<Integer>(procTmpEspMap.values()));
+        float tmpMediRetorno = ToolsUtils.getTempoMedio(new ArrayList<Integer>(procTmpRetMap.values()));
 
-        ri.setDiagramaTempExex(diagramaTempExex);
-        ri.setNumeroTrocas(NumeroTrocas);
-        ri.setTempoMedioEspera((int) tmpMedioEsp);
-        ri.setTempoMedioRetorno((int) tmpMediRetorno);
-
-
-        
-        
-        return ri;
+        return new ResultItem(tmpMedioEsp, tmpMediRetorno, numeroTrocas, diagramaTempExex);
 
 
     }
@@ -116,7 +104,6 @@ public class EscalonadorRRComPrioridade implements Escalonador {
     private Processo getProximoProcessoComPrioridade(ArrayList<Processo> llp) {
         
         Processo processoEscolhido = null;
-        boolean encontrouMenorIgual = false;
         int anterior = 0;
         int escolhido = 0;
         int atual = 0;        
