@@ -29,12 +29,20 @@ public class ResultBuilder {
 	public void print(List<Processo> processos) {
 		
 		for (Escalonador escalonador : escalonadores) {
-			List<Processo> procs = (List<Processo>)((ArrayList<Processo>) processos).clone();
+			List<Processo> procs = this.clonaLista(processos);
 			ResultItem result = escalonador.execute(procs);
 			System.out.println(escalonador.getName());
 			this.printResult(result);
 			System.out.println();
 		}
+	}
+	
+	public List<Processo> clonaLista(List<Processo> procs) {
+		List<Processo> processos = new ArrayList<Processo>();
+		for (Processo processo : procs) {
+			processos.add(processo.clone());
+		}
+		return processos;
 	}
 	
 	public void printResult(ResultItem result) {

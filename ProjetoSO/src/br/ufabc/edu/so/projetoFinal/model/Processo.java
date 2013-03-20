@@ -116,4 +116,8 @@ public class Processo {
 		else
 			this.processado = Processado;
 	}
+	
+	public Processo clone() {
+		return new Processo(id, hrCriacao, duracao, prioridade, false);
+	}
 }
