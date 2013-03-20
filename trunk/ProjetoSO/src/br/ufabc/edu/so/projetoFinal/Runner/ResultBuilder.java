@@ -31,7 +31,7 @@ public class ResultBuilder {
 		for (Escalonador escalonador : escalonadores) {
 			List<Processo> procs = this.clonaLista(processos);
 			ResultItem result = escalonador.execute(procs);
-			System.out.println(escalonador.getName());
+			System.out.println("Escalonador: " + escalonador.getName());
 			this.printResult(result);
 			System.out.println();
 		}
