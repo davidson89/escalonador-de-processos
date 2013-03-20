@@ -48,10 +48,6 @@ public class EscalonadorRRSemPrioridade implements Escalonador {
 
 		while (count != prontos) {
 
-			// testes
-			System.out.println("Processando: " + atual.getId() + " " + atual.getDuracao());
-			System.out.println(atual.getProcessado() - 1 + " " + tempoQuantum + " " + tempo);
-
 			diagramaTempExex.put(tempo, atual);
 
 			// processa o processo atual e diminui em 1 o seu processado
