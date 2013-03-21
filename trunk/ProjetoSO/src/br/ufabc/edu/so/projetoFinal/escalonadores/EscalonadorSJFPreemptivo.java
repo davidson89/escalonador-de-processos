@@ -65,7 +65,7 @@ public class EscalonadorSJFPreemptivo implements Escalonador {
             
             //Se for o último instante pega os dados do último processo executado
             if(instante == tempoTotal - 1){
-            	String key = tempoInicio.get(idProc) + " - " + (instante + 1);
+            	String key = tempoInicio.get(idProc) + "-" + (instante + 1);
             	diagrama.put(key, processos.get(idProc));
             	if(tempoPausa.get(idProc) == 0){
                     procTmpEspMap.put(processos.get(idProc), tempoInicio.get(idProc)- processos.get(idProc).getHrCriacao());
@@ -81,7 +81,7 @@ public class EscalonadorSJFPreemptivo implements Escalonador {
             if(idProcAntigo != idProc){
             	
             	if(idProcAntigo != -1){
-            		String key = tempoInicio.get(idProcAntigo) + " - " + instante;
+            		String key = tempoInicio.get(idProcAntigo) + "-" + instante;
                 	diagrama.put(key, processos.get(idProcAntigo));
             	}
                 numTrocas++;
