@@ -11,7 +11,14 @@ import br.ufabc.edu.so.projetoFinal.model.Processo;
 
 public class ToolsUtils {
 
-	public static List<Processo> getListaProcessos(String fileName) throws FileNotFoundException {
+	/**
+	 * Gera os processos de um determinado arquivo
+	 * @param fileName nome do arquivo contendo os processos
+	 * @return Lista de processos
+	 * @throws FileNotFoundException caso o arquivo não seja encontrado
+	 * @throws RuntimeException caso o arquivo não esteja no padrão, para criação dos processos
+	 */
+	public static List<Processo> getListaProcessos(String fileName) throws FileNotFoundException, RuntimeException {
 		try {
 			Scanner scanner = new Scanner(new FileInputStream(fileName));
 			List<Processo> processos = new ArrayList<Processo>();
@@ -33,6 +40,11 @@ public class ToolsUtils {
 		}
 	}
 	
+	/**
+	 * Calcula a media dos valores passados na lista
+	 * @param valores valores a tirar a media
+	 * @return resultado da media
+	 */
 	public static float getTempoMedio(List<Integer> valores) {
 		int valorMedio = 0;
 		for (Integer valor : valores) {

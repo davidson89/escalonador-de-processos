@@ -13,6 +13,11 @@ import br.ufabc.edu.so.projetoFinal.escalonadores.EscalonadorSJFPreemptivo;
 import br.ufabc.edu.so.projetoFinal.model.Processo;
 import br.ufabc.edu.so.projetoFinal.model.ResultItem;
 
+/**
+ * Classe responsavel por imprimir o resultado das execuções de cada algoritomo de escalonamento
+ * @author davidson
+ *
+ */
 public class ResultBuilder {
 
 	private List<Escalonador> escalonadores;
@@ -20,12 +25,16 @@ public class ResultBuilder {
 	public ResultBuilder() {
 		escalonadores = new ArrayList<Escalonador>();
 		escalonadores.add(new EscalonadorFCFS());
-//		escalonadores.add(new EscalonadorRRComPrioridade());
+		escalonadores.add(new EscalonadorRRComPrioridade());
 		escalonadores.add(new EscalonadorRRSemPrioridade());
-//		escalonadores.add(new EscalonadorSJFNaoPreemptivo());
-//		escalonadores.add(new EscalonadorSJFPreemptivo());
+		escalonadores.add(new EscalonadorSJFNaoPreemptivo());
+		escalonadores.add(new EscalonadorSJFPreemptivo());
 	}
 	
+	/**
+	 * Imprime o resultado de cada execução
+	 * @param processos
+	 */
 	public void print(List<Processo> processos) {
 		
 		for (Escalonador escalonador : escalonadores) {
@@ -37,6 +46,11 @@ public class ResultBuilder {
 		}
 	}
 	
+	/**
+	 * Clona a lista de processos para que um escalonador não interfira no resultado de outro.
+	 * @param procs processos a serem clonados
+	 * @return uma nova lista identica a passada como parametro
+	 */
 	public List<Processo> clonaLista(List<Processo> procs) {
 		List<Processo> processos = new ArrayList<Processo>();
 		for (Processo processo : procs) {
@@ -51,8 +65,7 @@ public class ResultBuilder {
 		System.out.println("Numero de trocas de contexto: " + result.getNumeroTrocas());
 		System.out.println("Instante   -   Processo");
 		for(Entry<String, Processo> entry : result.getDiagramaTempExex().entrySet()) {
-			System.out.printf(" %2s \t  %9s%d\n", entry.getKey(),"P", entry.getValue().getId());
-//			System.out.println("   " + entry.getKey() + "              P" + entry.getValue().getId());
+			System.out.printf(" %s \t  %9s%d\n", entry.getKey(),"P", entry.getValue().getId());
 		}
 	}
 	

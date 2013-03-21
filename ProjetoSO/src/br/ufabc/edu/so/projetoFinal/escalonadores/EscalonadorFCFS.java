@@ -19,10 +19,14 @@ public class EscalonadorFCFS implements Escalonador {
 	public ResultItem execute(List<Processo> processos) {
 		int instante = 0;
 		int numeroTrocas = 0;
+		//diagrama de tempo de execução
 		Map<String, Processo> diagrama = new LinkedHashMap<String, Processo>();
+		//Mapa para geração do tempo medio de espera do escalonador
 		Map<Processo, Integer> procTmpEspMap = new HashMap<Processo, Integer>();
+		//Mapa para geração do tempo medio de retorno do escalonador
 		Map<Processo, Integer> procTmpRetMap = new HashMap<Processo, Integer>();
 		for (Processo processo : processos) {
+			//chave do mapeamento do diagrama de execução
 			String key = String.valueOf(instante);
 			key = key + "-";
 			procTmpEspMap.put(processo, instante - processo.getHrCriacao());

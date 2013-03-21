@@ -5,6 +5,11 @@ import java.util.List;
 import br.ufabc.edu.so.projetoFinal.model.Processo;
 import br.ufabc.edu.so.projetoFinal.model.ResultItem;
 
+/**
+ * Interface para a criação de escalonadores.
+ * @author davidson
+ *
+ */
 public interface Escalonador {
 	
 	/**

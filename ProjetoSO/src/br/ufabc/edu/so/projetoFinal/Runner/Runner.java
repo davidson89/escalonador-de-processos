@@ -8,18 +8,21 @@ import br.ufabc.edu.so.projetoFinal.util.ToolsUtils;
 
 public class Runner {
 
-	public Runner() {
+	public Runner(String urlFile) {
 		try {
-			List<Processo> processos = ToolsUtils.getListaProcessos(System.getProperty("user.dir")+ "/src/br/ufabc/edu/so/projetoFinal/Runner/processos.txt");
+			
+			List<Processo> processos = ToolsUtils.getListaProcessos(urlFile);
 			ResultBuilder resultBuilder = new ResultBuilder();
 			resultBuilder.print(processos);
 		} catch (FileNotFoundException e) {
+			System.out.println(e.getMessage());
+		} catch (RuntimeException e) {
 			System.out.println(e.getMessage());
 		}
 	}
 
 	public static void main(String[] args) {
-		new Runner();
+		new Runner(args[0]);
 	}
 
 }
