@@ -20,10 +20,10 @@ public class ResultBuilder {
 	public ResultBuilder() {
 		escalonadores = new ArrayList<Escalonador>();
 		escalonadores.add(new EscalonadorFCFS());
-		escalonadores.add(new EscalonadorRRComPrioridade());
+//		escalonadores.add(new EscalonadorRRComPrioridade());
 		escalonadores.add(new EscalonadorRRSemPrioridade());
-		escalonadores.add(new EscalonadorSJFNaoPreemptivo());
-		escalonadores.add(new EscalonadorSJFPreemptivo());
+//		escalonadores.add(new EscalonadorSJFNaoPreemptivo());
+//		escalonadores.add(new EscalonadorSJFPreemptivo());
 	}
 	
 	public void print(List<Processo> processos) {
@@ -50,8 +50,9 @@ public class ResultBuilder {
 		System.out.println("Tempo médio de retorno: " + result.getTempoMedioRetorno());
 		System.out.println("Numero de trocas de contexto: " + result.getNumeroTrocas());
 		System.out.println("Instante   -   Processo");
-		for(Entry<Integer, Processo> entry : result.getDiagramaTempExex().entrySet()) {
-			System.out.println("   " + entry.getKey() + "              P" + entry.getValue().getId());
+		for(Entry<String, Processo> entry : result.getDiagramaTempExex().entrySet()) {
+			System.out.printf(" %2s \t  %9s%d\n", entry.getKey(),"P", entry.getValue().getId());
+//			System.out.println("   " + entry.getKey() + "              P" + entry.getValue().getId());
 		}
 	}
 	

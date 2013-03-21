@@ -2,8 +2,10 @@ package br.ufabc.edu.so.projetoFinal.escalonadores;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 import br.ufabc.edu.so.projetoFinal.model.Processo;
 import br.ufabc.edu.so.projetoFinal.model.ResultItem;
@@ -18,7 +20,7 @@ public class EscalonadorSJFPreemptivo implements Escalonador {
 	public ResultItem execute(List<Processo> processos) {
 		int instante = 0;
         int numTrocas = 0;
-        Map<Integer, Processo> diagrama = new HashMap<Integer, Processo>();
+        Map<String, Processo> diagrama = new LinkedHashMap<String, Processo>();
         Map<Processo, Integer> procTmpEspMap = new HashMap<Processo, Integer>();
         Map<Processo, Integer> procTmpRetMap = new HashMap<Processo, Integer>();
         
@@ -63,7 +65,9 @@ public class EscalonadorSJFPreemptivo implements Escalonador {
             
             //Se for o último instante pega os dados do último processo executado
             if(instante == tempoTotal - 1){
-                if(tempoPausa.get(idProc) == 0){
+            	String key = tempoInicio.get(idProc) + " - " + (instante + 1);
+            	diagrama.put(key, processos.get(idProc));
+            	if(tempoPausa.get(idProc) == 0){
                     procTmpEspMap.put(processos.get(idProc), tempoInicio.get(idProc)- processos.get(idProc).getHrCriacao());
                 }
                 else{
@@ -75,7 +79,11 @@ public class EscalonadorSJFPreemptivo implements Escalonador {
             
             //Se o processo tiver mudado guarda os dados do último processo e começa a execução do novo
             if(idProcAntigo != idProc){
-                diagrama.put(instante, processos.get(idProc));
+            	
+            	if(idProcAntigo != -1){
+            		String key = tempoInicio.get(idProcAntigo) + " - " + instante;
+                	diagrama.put(key, processos.get(idProcAntigo));
+            	}
                 numTrocas++;
                 processos.get(idProc).setDuracao(processos.get(idProc).getDuracao() - 1);
                 
