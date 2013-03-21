@@ -57,5 +57,18 @@ public class ToolsUtils {
 		}
 		return ((float)valorMedio/(float)valores.size());
 	}
+        
+        	/**
+	 * Clona a lista de processos para que um escalonador não interfira no resultado de outro.
+	 * @param procs processos a serem clonados
+	 * @return uma nova lista identica a passada como parametro
+	 */
+	public static List<Processo> clonaLista(List<Processo> procs) {
+		List<Processo> processos = new ArrayList<Processo>();
+		for (Processo processo : procs) {
+			processos.add(processo.clone());
+		}
+		return processos;
+	}
 
 }
