@@ -1,20 +1,22 @@
 package br.ufabc.edu.so.projetoFinal.escalonadores;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import br.ufabc.edu.so.projetoFinal.model.Processo;
 import br.ufabc.edu.so.projetoFinal.model.ResultItem;
 import br.ufabc.edu.so.projetoFinal.util.ToolsUtils;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.Map;
 
 public class EscalonadorRRSemPrioridade implements Escalonador {
 
 	int quantum = 2;
 	LinkedList<Processo> listaProcesso;
-	Map<Integer, Processo> diagramaTempExex;
+	Map<String, Processo> diagramaTempExex;
 
 	/**
 	 * {@inheritDoc}
@@ -25,7 +27,7 @@ public class EscalonadorRRSemPrioridade implements Escalonador {
 		if (processos.isEmpty())
 			return new ResultItem();
 
-		diagramaTempExex = new HashMap<Integer, Processo>();
+		diagramaTempExex = new LinkedHashMap<String, Processo>();
 
 		//
 		int numeroTrocas = 0;
@@ -43,12 +45,18 @@ public class EscalonadorRRSemPrioridade implements Escalonador {
 		int tempoQuantum = 0;
 		// lista ligada de processos
 		listaProcesso = listaProcesso(processos);
+		//guarda o ultimo id para fazer o diagrama de tempo de execução
+		int idLastProc = -1;
 		// pega o primeiro processo
 		Processo atual = listaProcesso.pop();
 
 		while (count != prontos) {
-
-			diagramaTempExex.put(tempo, atual);
+			if(atual.getId()!= idLastProc) {
+				String key = String.valueOf(tempo);
+				key = key + "-" + String.valueOf(tempo + quantum);
+				diagramaTempExex.put(key, atual);
+				idLastProc = atual.getId(); 
+			}
 
 			// processa o processo atual e diminui em 1 o seu processado
 			atual.setProcessado(atual.getProcessado() - 1);
@@ -92,7 +100,7 @@ public class EscalonadorRRSemPrioridade implements Escalonador {
 
 		float tmpMedioEsp = ToolsUtils.getTempoMedio(new ArrayList<Integer>(procTmpEspMap.values()));
 		float tmpMediRetorno = ToolsUtils.getTempoMedio(new ArrayList<Integer>(procTmpRetMap.values()));
-
+		
 		return new ResultItem(tmpMedioEsp, tmpMediRetorno, numeroTrocas, diagramaTempExex);
 	}
 

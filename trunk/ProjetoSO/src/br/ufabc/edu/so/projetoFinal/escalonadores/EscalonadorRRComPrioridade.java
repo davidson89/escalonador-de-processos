@@ -2,6 +2,7 @@ package br.ufabc.edu.so.projetoFinal.escalonadores;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -11,133 +12,141 @@ import br.ufabc.edu.so.projetoFinal.util.ToolsUtils;
 
 public class EscalonadorRRComPrioridade implements Escalonador {
 
-    int quantum = 2;
-    ArrayList<Processo> listaProcesso;
-    Map<Integer, Processo> diagramaTempExex;
+	int quantum = 2;
+	ArrayList<Processo> listaProcesso;
+	Map<String, Processo> diagramaTempExex;
 
 	/**
 	 * {@inheritDoc}
 	 */
-    @Override
-    public ResultItem execute(List<Processo> processos) {
+	@Override
+	public ResultItem execute(List<Processo> processos) {
 
-        if (processos.isEmpty()) {
-            return new ResultItem();
-        }
+		if (processos.isEmpty()) {
+			return new ResultItem();
+		}
 
-        diagramaTempExex = new HashMap<Integer, Processo>();
+		diagramaTempExex = new LinkedHashMap<String, Processo>();
 
+		//
+		int numeroTrocas = 0;
 
-        //
-        int numeroTrocas = 0;
+		//
+		Map<Processo, Integer> procTmpEspMap = new HashMap<Processo, Integer>();
+		Map<Processo, Integer> procTmpRetMap = new HashMap<Processo, Integer>();
 
-        //
-        Map<Processo, Integer> procTmpEspMap = new HashMap<Processo, Integer>();
-        Map<Processo, Integer> procTmpRetMap = new HashMap<Processo, Integer>();
+		int count = processos.size();
+		// quantos processos terminaram
+		int prontos = 0;
+		// tempo atual
+		int tempo = 0;
+		// contador do quantum
+		int tempoQuantum = 0;
+		// lista ligada de processos
+		listaProcesso = listaProcesso(processos);
 
-        int count = processos.size();
-        // quantos processos terminaram 
-        int prontos = 0;
-        // tempo atual 
-        int tempo = 0;
-        // contador do quantum
-        int tempoQuantum = 0;
-        // lista ligada de processos
-        listaProcesso = listaProcesso(processos);
-        // pega o primeiro processo
-        Processo atual = getProximoProcessoComPrioridade(listaProcesso);
+		// guarda o ultimo id para fazer o diagrama de tempo de execução
+		int idLastProc = -1;
 
-        while (count != prontos) {
+		// pega o primeiro processo
+		Processo atual = getProximoProcessoComPrioridade(listaProcesso);
 
-            diagramaTempExex.put(tempo, atual);
+		while (count != prontos) {
 
-            //processa o processo atual e diminui em 1 o seu processado
-            atual.setProcessado(atual.getProcessado() - 1);
+			if (atual.getId() != idLastProc) {
+				String key = String.valueOf(tempo);
+				key = key + "-" + String.valueOf(tempo + quantum);
+				diagramaTempExex.put(key, atual);
+				idLastProc = atual.getId();
+			}
 
-            // incrementa quamtum e tempo
-            tempoQuantum++;
-            tempo++;
+			// processa o processo atual e diminui em 1 o seu processado
+			atual.setProcessado(atual.getProcessado() - 1);
 
-            // se quantum ja atingiu o valor de parametro ou o processo ja terminou sua duraçao ( processado)
-            if (tempoQuantum == quantum || atual.getProcessado() == 0) {
-                // se nao terminou de ser processado vai para o fim da fila
-                if (atual.getProcessado() != 0) {
-                    listaProcesso.add(atual);
-                } // se ja terminou , nao entra na fila novamente e é marcado como pronto
-                else {
-                    atual.setFinished(true);
-                    prontos++;
-                        int espera = tempo - atual.getDuracao() - atual.getHrCriacao(); 
-                        int retorno = atual.getDuracao() + espera;
-                        procTmpEspMap.put(atual, espera);
-                        procTmpRetMap.put(atual, retorno);
-                    
-                    
-                }
+			// incrementa quamtum e tempo
+			tempoQuantum++;
+			tempo++;
 
-                numeroTrocas++;
+			// se quantum ja atingiu o valor de parametro ou o processo ja
+			// terminou sua duraçao ( processado)
+			if (tempoQuantum == quantum || atual.getProcessado() == 0) {
+				// se nao terminou de ser processado vai para o fim da fila
+				if (atual.getProcessado() != 0) {
+					listaProcesso.add(atual);
+				} // se ja terminou , nao entra na fila novamente e é marcado
+					// como pronto
+				else {
+					atual.setFinished(true);
+					prontos++;
+					int espera = tempo - atual.getDuracao() - atual.getHrCriacao();
+					int retorno = atual.getDuracao() + espera;
+					procTmpEspMap.put(atual, espera);
+					procTmpRetMap.put(atual, retorno);
 
-                // zera quantum para o proximo processo
-                tempoQuantum = 0;
+				}
 
-                // se cabaou os processos , sai do loop
-                if (listaProcesso.isEmpty()) {
-                    break;
-                }
+				numeroTrocas++;
 
-                // caso contrario pega o primeiro da lista
-                atual = getProximoProcessoComPrioridade(listaProcesso);
-            }
-        }
+				// zera quantum para o proximo processo
+				tempoQuantum = 0;
 
+				// se cabaou os processos , sai do loop
+				if (listaProcesso.isEmpty()) {
+					break;
+				}
 
-        float tmpMedioEsp = ToolsUtils.getTempoMedio(new ArrayList<Integer>(procTmpEspMap.values()));
-        float tmpMediRetorno = ToolsUtils.getTempoMedio(new ArrayList<Integer>(procTmpRetMap.values()));
+				// caso contrario pega o primeiro da lista
+				atual = getProximoProcessoComPrioridade(listaProcesso);
+			}
+		}
 
-        return new ResultItem(tmpMedioEsp, tmpMediRetorno, numeroTrocas, diagramaTempExex);
+		float tmpMedioEsp = ToolsUtils.getTempoMedio(new ArrayList<Integer>(procTmpEspMap.values()));
+		float tmpMediRetorno = ToolsUtils.getTempoMedio(new ArrayList<Integer>(procTmpRetMap.values()));
 
+		return new ResultItem(tmpMedioEsp, tmpMediRetorno, numeroTrocas, diagramaTempExex);
 
-    }
+	}
 
-    private Processo getProximoProcessoComPrioridade(ArrayList<Processo> llp) {
-        
-        Processo processoEscolhido = null;
-        int anterior = 0;
-        int escolhido = 0;
-        int atual = 0;        
-            
-        anterior = llp.get(0).getPrioridade();
-            
-        // procura por algum processo de prioridade igual ou menor
-        for (int i = 0; i < llp.size() -1; i++) {
-            
-            atual = llp.get(i).getPrioridade();
-            if(atual<=anterior) escolhido = i;
-            anterior  = llp.get(i).getPrioridade();
-        }
-        
-        processoEscolhido = llp.remove(escolhido);        
-        return processoEscolhido;
-        
-    }
+	private Processo getProximoProcessoComPrioridade(ArrayList<Processo> llp) {
 
-    private ArrayList<Processo> listaProcesso(List<Processo> processos) {
-         
-        ArrayList<Processo> pro = new ArrayList<Processo>();
-        
-        for (int i = 0; i < processos.size(); i++) {
-            Processo p = processos.get(i);
-            int id = p.getId();
-            int hrCriacao = p.getHrCriacao();
-            int duracao = p.getDuracao();
-            int prioridade = p.getPrioridade();
-            Processo novo = new Processo(id, hrCriacao, duracao, prioridade);
-            pro.add(novo);
-        }
+		Processo processoEscolhido = null;
+		int anterior = 0;
+		int escolhido = 0;
+		int atual = 0;
 
-        return pro;
+		anterior = llp.get(0).getPrioridade();
 
-    }
+		// procura por algum processo de prioridade igual ou menor
+		for (int i = 0; i < llp.size() - 1; i++) {
+
+			atual = llp.get(i).getPrioridade();
+			if (atual <= anterior)
+				escolhido = i;
+			anterior = llp.get(i).getPrioridade();
+		}
+
+		processoEscolhido = llp.remove(escolhido);
+		return processoEscolhido;
+
+	}
+
+	private ArrayList<Processo> listaProcesso(List<Processo> processos) {
+
+		ArrayList<Processo> pro = new ArrayList<Processo>();
+
+		for (int i = 0; i < processos.size(); i++) {
+			Processo p = processos.get(i);
+			int id = p.getId();
+			int hrCriacao = p.getHrCriacao();
+			int duracao = p.getDuracao();
+			int prioridade = p.getPrioridade();
+			Processo novo = new Processo(id, hrCriacao, duracao, prioridade);
+			pro.add(novo);
+		}
+
+		return pro;
+
+	}
 
 	@Override
 	public String getName() {

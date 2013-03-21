@@ -2,6 +2,7 @@ package br.ufabc.edu.so.projetoFinal.escalonadores;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -18,7 +19,7 @@ public class EscalonadorSJFNaoPreemptivo implements Escalonador {
 	public ResultItem execute(List<Processo> processos) {
 		int instante = 0;
 		int numTrocas = 0;
-		Map<Integer, Processo> diagrama = new HashMap<Integer, Processo>();
+		Map<String, Processo> diagrama = new LinkedHashMap<String, Processo>();
 		Map<Processo, Integer> procTmpEspMap = new HashMap<Processo, Integer>();
 		Map<Processo, Integer> procTmpRetMap = new HashMap<Processo, Integer>();
 
@@ -49,10 +50,14 @@ public class EscalonadorSJFNaoPreemptivo implements Escalonador {
 				}
 			}
 
-			diagrama.put(instante, processos.get(idProc));
+			//diagrama.put(instante, processos.get(idProc));
+			String key = String.valueOf(instante);
+			key = key + "-";
 			procTmpEspMap.put(processos.get(idProc), instante - processos.get(idProc).getHrCriacao());
 			// Aumenta o instante para o tempo de execução do processo
 			instante += processos.get(idProc).getDuracao();
+			key = key +  String.valueOf(instante);;
+			diagrama.put(key, processos.get(idProc));
 			procTmpRetMap.put(processos.get(idProc), procTmpEspMap.get(processos.get(idProc)) + processos.get(idProc).getDuracao());
 			numTrocas++;
 			processos.get(idProc).setFinished(true);

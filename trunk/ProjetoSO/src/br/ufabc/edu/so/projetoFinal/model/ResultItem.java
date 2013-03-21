@@ -20,9 +20,9 @@ public class ResultItem {
 	// executado a cada instante
 	// Exemplo: instante 0 - Processo 1 | instante 3 - Processo 2 | instante 5 -
 	// Processo 1
-	private Map<Integer, Processo> diagramaTempExex;
+	private Map<String, Processo> diagramaTempExex;
 
-	public ResultItem(float tempoMedioEspera, float tempoMedioRetorno, int numeroTrocas, Map<Integer, Processo> diagramaTempExex) {
+	public ResultItem(float tempoMedioEspera, float tempoMedioRetorno, int numeroTrocas, Map<String, Processo> diagramaTempExex) {
 		this.tempoMedioEspera = tempoMedioEspera;
 		this.tempoMedioRetorno = tempoMedioRetorno;
 		this.numeroTrocas = numeroTrocas;
@@ -88,7 +88,7 @@ public class ResultItem {
 	 * 
 	 * @return diagrama de tempo de execução
 	 */
-	public Map<Integer, Processo> getDiagramaTempExex() {
+	public Map<String, Processo> getDiagramaTempExex() {
 		return diagramaTempExex;
 	}
 
@@ -97,7 +97,7 @@ public class ResultItem {
 	 * @param diagramaTempExex
 	 *            recebe um mapa com a estrutura instante-processo.
 	 */
-	public void setDiagramaTempExex(Map<Integer, Processo> diagramaTempExex) {
+	public void setDiagramaTempExex(Map<String, Processo> diagramaTempExex) {
 		this.diagramaTempExex = diagramaTempExex;
 	}
 
