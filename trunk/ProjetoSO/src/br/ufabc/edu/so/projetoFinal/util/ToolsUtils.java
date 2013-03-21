@@ -25,6 +25,10 @@ public class ToolsUtils {
 			while (scanner.hasNextLine()) {
 				String processo = scanner.nextLine();
 				String[] values = processo.split(" ");
+				if(values.length != 4) {
+					scanner.close();
+					throw new RuntimeException("Arquivo com formato incompativel para o mapeamento dos processos!");
+				}
 				int id = Integer.parseInt(values[0]);
 				int hrCriacao = Integer.parseInt(values[1]);
 				int duracao = Integer.parseInt(values[2]);
@@ -35,8 +39,6 @@ public class ToolsUtils {
 			return processos;
 		} catch (FileNotFoundException e) {
 			throw new FileNotFoundException("Não foi possivel encontrar o arquivo: " + fileName);
-		} catch (IndexOutOfBoundsException e) {
-			throw new RuntimeException("Arquivo com formato incompativel para o mapeamento dos processos!");
 		}
 	}
 	
