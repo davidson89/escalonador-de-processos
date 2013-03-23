@@ -12,7 +12,7 @@ import br.ufabc.edu.so.projetoFinal.util.ToolsUtils;
 
 public class EscalonadorRRComPrioridade implements Escalonador {
 
-	int quantum = 2;
+	int quantum = 5;
 	ArrayList<Processo> listaProcesso;
 	Map<String, Processo> diagramaTempExex;
 
