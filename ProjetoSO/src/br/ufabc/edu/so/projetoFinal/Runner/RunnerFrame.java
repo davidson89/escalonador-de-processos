@@ -22,6 +22,8 @@ import br.ufabc.edu.so.projetoFinal.escalonadores.EscalonadorSJFPreemptivo;
 import br.ufabc.edu.so.projetoFinal.model.Processo;
 import br.ufabc.edu.so.projetoFinal.model.ResultItem;
 import br.ufabc.edu.so.projetoFinal.util.ToolsUtils;
+import java.awt.Color;
+import java.awt.Font;
 
 /**
  *
@@ -62,6 +64,7 @@ public class RunnerFrame extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
         jButton8 = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -71,6 +74,8 @@ public class RunnerFrame extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Comic Sans MS", 3, 23)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 0, 7));
         jLabel2.setText("Bem Vindo ao Simulador de Escalonamento de CPU!");
+
+        jSeparator1.setAutoscrolls(true);
 
         jButton1.setText("Abrir arquivo");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -148,7 +153,6 @@ public class RunnerFrame extends javax.swing.JFrame {
                     .add(layout.createSequentialGroup()
                         .add(45, 45, 45)
                         .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                            .add(jLabel3)
                             .add(layout.createSequentialGroup()
                                 .add(jLabel1)
                                 .add(18, 18, 18)
@@ -156,21 +160,25 @@ public class RunnerFrame extends javax.swing.JFrame {
                                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
                                 .add(jButton1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 121, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                             .add(layout.createSequentialGroup()
-                                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING, false)
-                                    .add(org.jdesktop.layout.GroupLayout.LEADING, jButton7, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .add(org.jdesktop.layout.GroupLayout.LEADING, jButton6, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .add(org.jdesktop.layout.GroupLayout.LEADING, jButton5, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .add(org.jdesktop.layout.GroupLayout.LEADING, jButton4, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE)
-                                    .add(org.jdesktop.layout.GroupLayout.LEADING, jButton3, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .add(org.jdesktop.layout.GroupLayout.LEADING, jButton2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .add(jButton8, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .add(90, 90, 90)
-                                .add(jScrollPane1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 636, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
-                .add(0, 32, Short.MAX_VALUE)
+                                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                                    .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING, false)
+                                        .add(org.jdesktop.layout.GroupLayout.LEADING, jButton7, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .add(org.jdesktop.layout.GroupLayout.LEADING, jButton6, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .add(org.jdesktop.layout.GroupLayout.LEADING, jButton5, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .add(org.jdesktop.layout.GroupLayout.LEADING, jButton4, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE)
+                                        .add(org.jdesktop.layout.GroupLayout.LEADING, jButton3, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .add(org.jdesktop.layout.GroupLayout.LEADING, jButton2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .add(jButton8, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .add(jLabel3))
+                                .add(54, 54, 54)
+                                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                                    .add(jScrollPane1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 636, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                    .add(jLabel4, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
+                .addContainerGap())
+            .add(layout.createSequentialGroup()
+                .add(32, 32, 32)
                 .add(jSeparator1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 962, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .add(26, 26, 26))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -186,9 +194,9 @@ public class RunnerFrame extends javax.swing.JFrame {
                         .add(jTextField1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                         .add(jButton1)))
                 .add(30, 30, 30)
-                .add(jLabel3)
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                     .add(layout.createSequentialGroup()
+                        .add(jLabel3)
                         .add(39, 39, 39)
                         .add(jButton2)
                         .add(26, 26, 26)
@@ -204,8 +212,9 @@ public class RunnerFrame extends javax.swing.JFrame {
                         .add(28, 28, 28)
                         .add(jButton8))
                     .add(layout.createSequentialGroup()
-                        .add(18, 18, 18)
-                        .add(jScrollPane1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 411, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
+                        .add(jLabel4, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 30, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                        .add(jScrollPane1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 405, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(86, Short.MAX_VALUE))
         );
 
@@ -307,11 +316,18 @@ public class RunnerFrame extends javax.swing.JFrame {
 
     public void executeEscalonador(List<Escalonador> escalonadores) {
         try {
+            this.jLabel4.setFont(new Font("Comic Sans MS", Font.BOLD, 15));
             List<Processo> processos = ToolsUtils.getListaProcessos(jTextField1.getText());
             this.print(processos, escalonadores);
+            this.jLabel4.setText("Arquivo executado com sucesso!");
+            this.jLabel4.setForeground(Color.green);
         } catch (FileNotFoundException ex) {
+            this.jLabel4.setText(ex.getMessage());
+            this.jLabel4.setForeground(Color.red);
             Logger.getLogger(RunnerFrame.class.getName()).log(Level.SEVERE, null, ex);
         } catch (RuntimeException ex) {
+            this.jLabel4.setText(ex.getMessage());
+            this.jLabel4.setForeground(Color.red);
             Logger.getLogger(RunnerFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -352,6 +368,7 @@ public class RunnerFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTextArea jTextArea1;
